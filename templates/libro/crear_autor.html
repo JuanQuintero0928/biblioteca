@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block titulo %}
+    Creación de Autores
+{% endblock titulo %}
+{% block body %}
+    <form method="post">
+        {% csrf_token %}
+        {% if error %}
+            <h2>{{ error }}</h2>
+        {% else %}
+            
+            <!-- Diferentes maneras de mostrar el formulario -->
+            <!-- <label>Nombre</label>
+            <input type="text" name="nombre">
+            <label>Apellidos</label>
+            <input type="text" name="apellido">
+            <label>Nacionalidad</label>
+            <input type="text" name="nacionalidad">
+            <label>Descripción</label>
+            <input type="text" name="descripcion">
+            <label>Apellidos</label> -->
+
+            <!-- Una manera en la que se puede mostrar todo el formulario -->
+            {{ autor_form.as_p }}
+            <button type="submit">Crear</button>
+        {% endif %}
+        
+    </form>
+{% endblock body %}

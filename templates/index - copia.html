@@ -3,7 +3,7 @@
 <html class="no-js" lang="es">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block titulo_pag %}Biblioteca.dev{% endblock titulo_pag %}</title>
+    <title>Biblioteca.dev</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
@@ -24,14 +24,14 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{% url 'index' %}"><i class="menu-icon fa fa-laptop"></i>Inicio</a>
+                        <a href="#"><i class="menu-icon fa fa-laptop"></i>Inicio</a>
                     </li>
                     <li class="menu-title">Gestionar</li>
                     <li class="menu-item-has-children active dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-cogs"></i>Autores</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-card-o"></i><a href="{% url 'libro:crear_autor'%}">Registrar Autor</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{% url 'libro:listar_autor' %}">Listar Autores</a></li>
+                            <li><i class="fa fa-id-card-o"></i><a href="#">Registrar Autor</a></li>
+                            <li><i class="fa fa-bars"></i><a href="#">Listar Autores</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -54,7 +54,7 @@
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'index' %}"><strong>Biblioteca.dev</strong></a>
+                    <a class="navbar-brand" href="#"><strong>Biblioteca.dev</strong></a>
                     <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -91,7 +91,18 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>{% block encabezado %}Inicio{% endblock encabezado %}</h1>
+                                <h1>Dashboard</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">UI Elements</a></li>
+                                    <li class="active">Typography</li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -105,12 +116,10 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong class="card-title" v-if="headerText">{% block titulo_modulo %}Biblioteca{% endblock titulo_modulo%}</strong>
+                                    <strong class="card-title" v-if="headerText">Typography</strong>
                                 </div>
                                 <div class="card-body">
-                                    {% block contenido %}
-
-                                    {% endblock contenido%}
+                                    contenido
                                 </div>
                             </div>
                         </div>

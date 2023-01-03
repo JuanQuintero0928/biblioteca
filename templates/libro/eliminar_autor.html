@@ -1,12 +1,32 @@
 {% extends 'index.html' %}
-{% block titulo %}
-    Eliminación de Autor
-{% endblock titulo %}
-{% block body %}
-    <form method="post">
-        {% csrf_token %}
-        <h2>¿Desea eliminar el registro {{ autor.nombre}}?</h2>
-        <button type="submit">Eliminar</button>
-        <a href="{% url 'libro:listar_autor' %}">Regresar</a>
-    </form>
-{% endblock body %}
+
+{% block titulo_pag %}
+    Eliminación de Autores
+{% endblock titulo_pag %}
+
+{% block encabezado%}
+    Eliminar Autor
+{% endblock encabezado %}
+
+{% block titulo_modulo %}
+    
+{% endblock titulo_modulo %}
+
+{% block contenido %}
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="card"
+                <form method="post">
+                    {% csrf_token %}
+                    <h3>¿Desea eliminar el registro {{ autor.nombre}} {{ autor.apellido}}?</h3><br>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-success btn-lg btn-bloc">Eliminar</button>
+                        <a href="{% url 'libro:listar_autor' %}" class="btn btn-outline-link btn-lg btn-block">Regresar</a>    
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

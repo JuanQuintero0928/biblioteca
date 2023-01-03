@@ -1,40 +1,53 @@
 {% extends 'index.html' %}
 
-{% block titulo %}
+{% block titulo_pag %}
     Listado de Autores
-{% endblock titulo %}
-{% block body %}
+{% endblock titulo_pag %}
 
+{% block encabezado%}
+    Autores
+{% endblock encabezado %}
+
+{% block titulo_modulo %}
+    Gestionar Autores
+{% endblock titulo_modulo %}
+
+{% block contenido %}
     {% if autores %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Nacionalidad</th>
-                    <th>Descripcion</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for autor in autores %}
-                <tr>
-                    <td>{{ autor.id }}</td>
-                    <td>{{ autor.nombre }}</td>
-                    <td>{{ autor.apellido }}</td>
-                    <td>{{ autor.nacionalidad }}</td>
-                    <td>{{ autor.descripcion }}</td>
-                    <td>
-                        <a href="{% url 'libro:editar_autor' autor.id %}">Editar</a>
-                        <a href="{% url 'libro:eliminar_autor' autor.id%}">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <h1>No existen Autores Registrados</h1>
-    {% endif %}
-
-{% endblock body %}
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Nacionalidad</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for autor in autores %}
+                        <tr>
+                            <th scope="row">{{ autor.id }}</th>
+                            <td>{{ autor.nombre }}</td>
+                            <td>{{ autor.apellido }}</td>
+                            <td>{{ autor.nacionalidad }}</td>
+                            <td>{{ autor.descripcion }}</td>
+                            <td>
+                                <a href="{% url 'libro:editar_autor' autor.id %}">Editar</a>
+                                <a href="{% url 'libro:eliminar_autor' autor.id%}">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h1>No existen Autores Registrados</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

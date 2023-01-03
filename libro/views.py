@@ -2,11 +2,48 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import AutorForm
 from .models import Autor
+from django.views.generic import TemplateView,ListView, UpdateView, CreateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
-def Home(request):
-    return render(request,'index.html')
+# dispatch : valida la peticion y elige que metodo HTTP se utilizo para la solicitud
+# http_method_not_allowed(): retorna un error cuando se utiliza un metodo http no soportado o definido
+# options():
+# TemplateView hereda de view
+# ***
+
+class Inicio(TemplateView):
+    template_name = 'index.html'
+    # def get(self, request, *args, **kwargs):
+    #     return render(request,'index.html') 
+
+class ListadoAutor(ListView):
+    model = Autor
+    template_name = 'libro/listar_autor.html'
+    context_object_name = 'autores'
+    queryset = Autor.objects.filter(estado = True)
+
+class ActualizarAutor(UpdateView):
+    model = Autor
+    template_name = 'libro/crear_autor.html'
+    form_class = AutorForm
+    success_url = reverse_lazy('libro:listar_autor')
+
+class CrearAutor(CreateView):
+    model = Autor
+    form_class = AutorForm
+    template_name = 'libro/crear_autor.html'
+    success_url = reverse_lazy('libro:listar_autor')
+
+class EliminarAutor(DeleteView):
+    model = Autor
+
+    def post(self, request, pk, *args, **kwargs):
+        object = Autor.objects.get(id=pk)
+        object.estado = False
+        object.save()
+        return redirect('libro:listar_autor')
 
 def crearAutor(request):
     if request.method == 'POST':
@@ -14,7 +51,7 @@ def crearAutor(request):
         if autor_form.is_valid():
             # nom = autor_form.cleaned_data['nombre'] ---> capturar un solo valor para poder hacer algun calculo
             autor_form.save()
-            return redirect('index')
+            return redirect('libro:listar_autor')
     else:
         autor_form = AutorForm()
         return render(request,'libro/crear_autor.html',{'autor_form':autor_form})

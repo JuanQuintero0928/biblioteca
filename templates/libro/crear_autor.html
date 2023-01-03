@@ -1,29 +1,86 @@
 {% extends 'index.html' %}
-{% block titulo %}
-    Creación de Autores
-{% endblock titulo %}
-{% block body %}
-    <form method="post">
-        {% csrf_token %}
-        {% if error %}
-            <h2>{{ error }}</h2>
-        {% else %}
-            
-            <!-- Diferentes maneras de mostrar el formulario -->
-            <!-- <label>Nombre</label>
-            <input type="text" name="nombre">
-            <label>Apellidos</label>
-            <input type="text" name="apellido">
-            <label>Nacionalidad</label>
-            <input type="text" name="nacionalidad">
-            <label>Descripción</label>
-            <input type="text" name="descripcion">
-            <label>Apellidos</label> -->
 
-            <!-- Una manera en la que se puede mostrar todo el formulario -->
-            {{ autor_form.as_p }}
-            <button type="submit">Crear</button>
-        {% endif %}
+{% block titulo_pag %}
+    Creación de Autores
+{% endblock titulo_pag %}
+
+{% block encabezado%}
+    Crear Un Autor
+{% endblock encabezado %}
+
+{% block titulo_modulo %}
+    Formulario
+{% endblock titulo_modulo %}
+
+{% block contenido %}
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body card-block">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% if error %}
+                        <h2>{{ error }}</h2>
+                    {% else %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                            {% comment %} <input type="text" name="nombre" value="{{ autor_form.nombre }}" placeholder="Nombre" class="form-control"> {% endcomment %}
+                            {{ form.nombre }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-user"></i></div>{% comment %}{{ autor_form.apellido.label }} --------- para mostrar el label del campo 
+                            <input type="text" name="apellido" placeholder="Apellido" class="form-control"> {% endcomment %}
+                            {{ form.apellido }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>
+                            {% comment %} <input type="text" name="nacionalidad" placeholder="Nacionalidad" class="form-control"> {% endcomment %}
+                            {{ form.nacionalidad }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-indent"></i></div>
+                            {% comment %} <input type="text" name="descripcion" placeholder="Descripción" class="form-control"> {% endcomment %}
+                            {{ form.descripcion }}
+                        </div>
+                    </div>
+                    <div class="form-actions form-group"><button type="submit" class="btn btn-success btn-sm float-right">Registrar</button></div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
+
+
+
+
+
+{% comment %} <form method="post">
+    {% csrf_token %}
+    {% if error %}
+        <h2>{{ error }}</h2>
+    {% else %} {% endcomment %}
         
-    </form>
-{% endblock body %}
+        <!-- Diferentes maneras de mostrar el formulario -->
+        {% comment %} <label>Nombre</label>
+        <input type="text" name="nombre">
+        <label>Apellidos</label>
+        <input type="text" name="apellido">
+        <label>Nacionalidad</label>
+        <input type="text" name="nacionalidad">
+        <label>Descripción</label>
+        <input type="text" name="descripcion">
+        <label>Apellidos</label> {% endcomment %}
+
+        <!-- Una manera en la que se puede mostrar todo el formulario -->
+        {% comment %} {{ autor_form.as_p }} {% endcomment %}
+        {% comment %} <button type="submit">Crear</button>
+    {% endif %} {% endcomment %}
+{% comment %}     
+</form> {% endcomment %}

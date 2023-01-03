@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from .forms import AutorForm
 from .models import Autor
 from django.views.generic import TemplateView,ListView, UpdateView, CreateView, DeleteView
@@ -45,6 +47,9 @@ class EliminarAutor(DeleteView):
         object.save()
         return redirect('libro:listar_autor')
 
+
+# Codigo con funciones
+# |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 def crearAutor(request):
     if request.method == 'POST':
         autor_form = AutorForm(request.POST)

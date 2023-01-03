@@ -37,12 +37,22 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group">
+                            {% if form.error_messages %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss = "alert" arial-label ="close">
+                                        <span aria-hidden = "true">&times;</span>
+                                    </button>
+                                    <strong>Advertencia:</strong>{{ form.get_invalid_login_error }}
+                                </div>
+                            {% endif %}
+                            {% comment %} <input type="text" class="form-control" placeholder="Usuario" name="username"> {% endcomment %}
                             <label>Usuario</label>
-                            <input type="text" class="form-control" placeholder="Usuario" name="username">
+                            {{ form.username }}
                         </div>
                         <div class="form-group">
                             <label>Constraseña</label>
-                            <input type="password" class="form-control" placeholder="Password" name="password">
+                            {% comment %} <input type="password" class="form-control" placeholder="Password" name="password"> {% endcomment %}
+                            {{ form.password }}
                         </div>
                         <div class="checkbox">
                             <label>

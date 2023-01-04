@@ -1,5 +1,5 @@
 from django import forms
-from .models import Autor
+from .models import Autor, Libro
 
 class AutorForm(forms.ModelForm): #puede heredar de ModelForm o Form
     class Meta:
@@ -38,6 +38,34 @@ class AutorForm(forms.ModelForm): #puede heredar de ModelForm o Form
                     'class':'form-control',
                     'placeholder':'Escriba una pequeña descripción del autor',
                     'id':'descripcion',
+                }
+            )
+        }
+
+class LibroForm(forms.ModelForm):
+    class Meta:
+        model = Libro
+        fields = ('titulo','autor_id','fecha_publicacion')
+        label = {
+            'titulo':'Titulo del libro',
+            'autor_id':'Autores del libro',
+            'fecha_publicacion':'Fecha publicación del libro'
+        }
+        widgets = {
+            'titulo': forms.TextInput(
+                attrs={
+                    'class':'form-control',
+                    'placeholder':'Ingrese titulo del libro',
+                }
+            ),
+            'autor_id': forms.SelectMultiple(
+                attrs={
+                    'class':'form-control'
+                }
+            ),
+            'fecha_publicacion': forms.SelectDateWidget(
+                attrs={
+                    'class':'form-control'
                 }
             )
         }

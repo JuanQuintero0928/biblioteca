@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block titulo_pag %}
+    Confirmacion de Eliminación
+{% endblock titulo_pag %}
+
+{% block encabezado%}
+    
+{% endblock encabezado %}
+
+{% block titulo_modulo %}
+    
+{% endblock titulo_modulo %}
+
+{% block contenido %}
+    <form method="post">
+        {% csrf_token %}
+        <p><strong>¿Desea eliminar el registro {{ object }}?</strong><br><br>
+        <button type="submit" class="btn btn-danger">Confirmar</button>
+    </form>
+
+{% endblock contenido %}

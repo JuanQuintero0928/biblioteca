@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView,ListView, UpdateView, CreateView, DeleteView
+from django.views.generic import View, TemplateView,ListView, UpdateView, CreateView, DeleteView
 from .forms import AutorForm, LibroForm
 from .models import Autor, Libro
 
@@ -47,10 +47,28 @@ class EliminarAutor(DeleteView):
         object.save()
         return redirect('libro:listar_autor')
 
-class ListadoLibro(ListView):
+class ListadoLibro(View):
     model = Libro
+    form_class = LibroForm
     template_name = 'libro/libro/listar_libro.html' #queryset = libro.objects.all() -> object_list
-    queryset = Libro.objects.filter(estado = True)
+
+    def _get_queryset(self):    # Retorna la consulta
+        return self.model.objects.filter(estado=True)
+
+    def get_context_data(self, **kwargs):   #Retorna la informacion que va hacer enviada al Template
+        context = {}
+        context['libros'] = self._get_queryset
+        context['form'] = self.form_class   #Envio el formulario al template
+        return context
+    
+    def get(self, request, *args, **kwargs):    # Retorna toda la informacion cuando se hace la peticion
+        return render(request, self.template_name, self.get_context_data())
+
+    # def post(self,request,*args, **kwargs):
+    #     form = self.form_class(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('libro:listar_libro')
 
 class CrearLibro(CreateView):
     model = Libro
@@ -60,9 +78,15 @@ class CrearLibro(CreateView):
 
 class ActualizarLibro(UpdateView):
     model = Libro
-    template_name = 'libro/libro/crear_libro.html'
+    template_name = 'libro/libro/libro.html'
     form_class = LibroForm
     success_url = reverse_lazy('libro:listar_libro')
+
+    #se realiza la consulta para mostrar en el template
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['libros'] = Libro.objects.filter(estado = True)
+        return context
 
 class EliminarLibro(DeleteView):
     model = Libro

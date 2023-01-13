@@ -15,6 +15,7 @@ from .models import Autor, Libro
 # TemplateView hereda de view
 # ***
 
+
 class Inicio(TemplateView):
     template_name = 'index.html'
     # def get(self, request, *args, **kwargs):
